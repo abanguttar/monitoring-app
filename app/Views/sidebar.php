@@ -10,14 +10,13 @@
     <div class="offcanvas-body">
         <div class="row gap-2">
 
-            <a href="/dashboard" class="btn btn-danger p-2">Dashboard</a>
-            <a href="/pelatihan" class="btn btn-danger p-2">List Pelatihan</a>
-            <a href="/peserta" class="btn btn-danger p-2">List Peserta</a>
-            <a href="/mitra" class="btn btn-danger p-2">List Mitra</a>
-            <a href="/digital-platform" class="btn btn-danger p-2">List Digital Platform</a>
-            <a href="/master-class" class="btn btn-danger p-2">List Master Class</a>
-            <a href="/users" class="btn btn-danger p-2">List User</a>
-            <a href="/logout" class="btn btn-danger p-2">Logout</a>
+            <a href="/dashboard" class="btn btn-light p-2">Dashboard</a>
+            <a href="/peserta" class="btn btn-light p-2">List Peserta</a>
+            <a href="/mitra" class="btn btn-light p-2">List Mitra</a>
+            <a href="/digital-platform" class="btn btn-light p-2">List Digital Platform</a>
+            <a href="/master-class" class="btn btn-light p-2">List Master Class</a>
+            <a href="/users" class="btn btn-light p-2">List User</a>
+            <a href="/logout" class="btn btn-light p-2">Logout</a>
         </div>
     </div>
 </div>

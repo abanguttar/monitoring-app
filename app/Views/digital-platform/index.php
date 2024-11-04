@@ -18,11 +18,11 @@
             </thead>
             <tbody id="table-body">
                 <?php foreach ($dps as $key => $item): ?>
-                    <tr class="table-row" data-id="digital-platform/<?= esc($item['id']) ?>">
+                    <tr class="table-row" data-id="digital-platform/<?= esc($item->id) ?>">
                         <td><?= esc(++$key) ?></td>
-                        <td><?= esc($item['dp_name']) ?></td>
-                        <td><?= esc($item['user_update']) ?></td>
-                        <td><?= esc($item['updated_at']) ?></td>
+                        <td><?= esc($item->dp_name) ?></td>
+                        <td><?= esc($item->username) ?></td>
+                        <td><?= esc($item->updated_at) ?></td>
                     </tr>
 
                 <?php endforeach ?>

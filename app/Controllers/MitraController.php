@@ -11,12 +11,14 @@ class MitraController extends BaseController
 {
     protected $validationRules = 'mitras';
     protected $mitra;
+    protected $db;
     // protected $user_create_update;
 
     public function __construct()
     {
         $this->mitra = new Mitra();
         parent::__construct();
+        $this->db = \Config\Database::connect();
     }
 
 
@@ -24,7 +26,9 @@ class MitraController extends BaseController
     public function index()
     {
         $title = 'Mitra';
-        $mitras = $this->mitra->findAll();
+        $mitras = $this->db->table('mitras as m')
+            ->join('users as u', 'u.id = m.user_update', 'left')
+            ->select('m.*, u.username')->get()->getResult();
         return view('mitra/index', compact('title', 'mitras'));
     }
 

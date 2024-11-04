@@ -19,6 +19,10 @@ class MasterClassTable extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
             ],
+            'jadwal' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '200',
+            ],
             'jam' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',

@@ -9,18 +9,30 @@ use CodeIgniter\HTTP\ResponseInterface;
 class MasterClassController extends BaseController
 {
     protected $masterClass;
+    protected $db;
 
     public function __construct()
     {
         parent::__construct();
         $this->masterClass = new MasterClass();
+        $this->db = \Config\Database::connect();
     }
 
     public function index()
     {
         $title = 'Master Class';
-        $masterClasses = $this->masterClass->findAll();
-        return view('master-class/index', compact('title', 'masterClasses'));
+        $perPage = 50;
+        $page = $this->request->getVar('page') ?? 1;
+        $offset = ($page - 1) * $perPage;
+        $builder = $this->db->table('master_classes as mc')
+            ->join('users as u', 'u.id = mc.user_update', 'left')
+            ->select('mc.*, u.username');
+        $total = $builder->countAllResults(false);
+        $masterClasses = $builder->limit($perPage, $offset)->get()->getResult();
+        $pager = \Config\Services::pager();
+        $pager->makeLinks($page, $perPage, $total, 'default_full');
+
+        return view('master-class/index', compact('title', 'masterClasses', 'pager'));
     }
 
 

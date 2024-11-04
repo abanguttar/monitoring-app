@@ -2,12 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Models\Pelatihan;
 use CodeIgniter\Controller;
+use Psr\Log\LoggerInterface;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
-use Psr\Log\LoggerInterface;
 
 /**
  * Class BaseController
@@ -38,6 +39,7 @@ abstract class BaseController extends Controller
     protected $helpers = [];
     protected $user_create_update;
     protected $user_update;
+    protected $pelatihan;
     protected $auth;
 
     public function __construct()
@@ -50,6 +52,7 @@ abstract class BaseController extends Controller
         $this->user_update = [
             'user_update' => $this->auth->user()->id
         ];
+        $this->pelatihan = new Pelatihan();
     }
 
 
@@ -64,6 +67,14 @@ abstract class BaseController extends Controller
         $session->setFlashdata('success', 'Updated data successfully!');
     }
 
+
+    public function validateInvoiceVoucher($invoice, $voucher)
+    {
+        return [
+            'invoice' => $this->pelatihan->where('invoice', $invoice)->first(),
+            'voucher' => $this->pelatihan->where('voucher', $voucher)->first()
+        ];
+    }
 
 
     /**

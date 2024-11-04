@@ -20,13 +20,13 @@
             </thead>
             <tbody id="table-body">
                 <?php foreach ($mitras as $key => $item): ?>
-                    <tr class="table-row" data-id="mitra/<?= esc($item['id']) ?>">
+                    <tr class="table-row" data-id="mitra/<?= esc($item->id) ?>">
                         <td><?= esc(++$key) ?></td>
-                        <td><?= esc($item['mitra_name']) ?></td>
-                        <td><?= esc($item['address']) ?></td>
-                        <td><?= esc($item['responsible']) ?></td>
-                        <td><?= esc($item['user_update']) ?></td>
-                        <td><?= esc($item['updated_at']) ?></td>
+                        <td><?= esc($item->mitra_name) ?></td>
+                        <td><?= esc($item->address) ?></td>
+                        <td><?= esc($item->responsible) ?></td>
+                        <td><?= esc($item->username) ?></td>
+                        <td><?= esc($item->updated_at) ?></td>
                     </tr>
 
                 <?php endforeach ?>

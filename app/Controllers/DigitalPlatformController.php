@@ -10,18 +10,22 @@ class DigitalPlatformController extends BaseController
 {
 
     protected $dp;
+    protected $db;
 
     public function __construct()
     {
         parent::__construct();
         $this->dp = new DigitalPlatform();
+        $this->db = \Config\Database::connect();
     }
 
 
     public function index()
     {
         $title = 'Digital Platform';
-        $dps = $this->dp->findAll();
+        $dps = $this->db->table('digital_platforms as dp')
+            ->join('users as u', 'u.id = dp.user_update', 'left')
+            ->select('dp.*, u.username')->get()->getResult();;
         return view('digital-platform/index', compact('title', 'dps'));
     }
 

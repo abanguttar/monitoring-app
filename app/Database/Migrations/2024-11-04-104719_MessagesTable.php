@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class ErrorMessagesTable extends Migration
+class MessagesTable extends Migration
 {
     public function up()
     {

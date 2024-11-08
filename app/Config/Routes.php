@@ -48,3 +48,4 @@ $routes->post('peserta/import-data/completion', [PesertaController::class, 'stor
 $routes->post('peserta/import-data/reconcile', [PesertaController::class, 'storeImportReconcile']);
 $routes->resource('peserta', ['controller' => 'PesertaController']);
 $routes->delete('delete-table-message', [PesertaController::class, 'destroyMessage']);
+$routes->get('download/(:any)', [PesertaController::class, 'downloadTemplate']);

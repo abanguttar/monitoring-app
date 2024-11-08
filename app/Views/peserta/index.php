@@ -8,10 +8,10 @@
         <div class="container-fluid">
             <form action="">
                 <div class="row gap-2">
-                    <div class="col-3">
+                    <div class="col-12 col-lg-3">
                         <input type="text" name="peserta_name" class="form-control" value="<?= $params['peserta_name'] ?? '' ?>" placeholder="Cari Nama atau Email">
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-lg-3">
                         <select name="pelatihans" class="form-select" id="pelatihans">
                             <option value="">--- Pilih Pelatihan ---</option>
                             <?php foreach ($pelatihans as $key => $pelatihan): ?>
@@ -19,7 +19,7 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-lg-3">
                         <select name="master_class_id" class="form-select" id="master_class_id">
                             <option value="">--- Pilih Pelatihan dan Jadwal ---</option>
                             <?php foreach ($master_classes as $key => $master_class): ?>
@@ -27,21 +27,21 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-lg-3">
                         <input type="text" name="voucher" class="form-control" value="<?= $params['voucher'] ?? '' ?>" placeholder="Cari Voucher">
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-lg-3">
 
                         <input type="text" name="invoice" class="form-control" value="<?= $params['invoice'] ?? '' ?>" placeholder="Cari Invoice">
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-lg-3">
 
                         <input type="text" name="redeem_code" class="form-control" value="<?= $params['redeem_code'] ?? '' ?>" placeholder="Cari Redeem Code">
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-lg-3">
                         <input type="text" name="payment_period" class="form-control" value="<?= $params['payment_period'] ?? '' ?>" placeholder="Cari Periode">
                     </div>
-                    <div class="col-3 mt-2">
+                    <div class="col-12 col-lg-3 mt-2">
                         <button type="submit" class="btn btn-sm btn-info text-white">Cari</button>
                         <a href="/peserta" class="btn btn-sm btn-dark text-white">Reset</a>
                     </div>
@@ -50,13 +50,13 @@
         </div>
 
 
-        <div class="mt-5">
+        <div class="mt-5 d-flex gap-1 flex-wrap">
             <a href="/peserta/import-data/pembelian" class="btn-sm btn btn-success">Import Data Pembelian</a>
             <a href="/peserta/import-data/redemption" class="btn-sm btn btn-success">Import Data Redemption</a>
             <a href="/peserta/import-data/completion" class="btn-sm btn btn-success">Import Data Completion</a>
             <a href="/peserta/import-data/reconcile" class="btn-sm btn btn-danger">Import Data Reconcile Mitra</a>
         </div>
-        <div class="mt-2">
+        <div class="mt-2 d-flex gap-1 flex-wrap">
             <a href="peserta/new" class="btn-sm btn btn-success">Create Peserta</a>
             <button id="btn-edit-peserta" class="btn-sm btn btn-primary">Edit Peserta</button>
             <button id="btn-add-pelatihan" class="btn-sm btn btn-success">Add New Pelatihan</button>

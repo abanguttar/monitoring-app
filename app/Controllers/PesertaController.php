@@ -245,44 +245,49 @@ class PesertaController extends BaseController
     {
         helper('form');
         $title = 'Import Data Pembelian';
+        $template = 'template-pembelian';
         $master_classes = $this->masterClass->findAll();
         $messages = $this->db->table('messages as m')
             ->join('master_classes as mc', 'mc.id = m.master_class_id', 'left')
             ->join('mitras as ma', 'ma.id = m.mitra_id', 'left')
             ->get()->getResult();
-        return view('peserta/import-pembelian', compact('title',  'messages', 'master_classes'));
+
+        return view('peserta/import-pembelian', compact('title',  'template', 'messages', 'master_classes'));
     }
     public function viewImportRedemption()
     {
         helper('form');
         $title = 'Import Data Redemption';
+        $template = 'template-redemption';
         $messages = $this->db->table('messages as m')
             ->join('master_classes as mc', 'mc.id = m.master_class_id', 'left')
             ->join('mitras as ma', 'ma.id = m.mitra_id', 'left')
             ->get()->getResult();
-        return view('peserta/import-redemption', compact('title',  'messages'));
+        return view('peserta/import-redemption', compact('title', 'template',  'messages'));
     }
     public function viewImportCompletion()
     {
         helper('form');
         $title = 'Import Data Completion';
+        $template = 'template-completion';
         $messages = $this->db->table('messages as m')
             ->join('master_classes as mc', 'mc.id = m.master_class_id', 'left')
             ->join('mitras as ma', 'ma.id = m.mitra_id', 'left')
             ->get()->getResult();
-        return view('peserta/import-redemption', compact('title',  'messages'));
+        return view('peserta/import-redemption', compact('title', 'template', 'messages'));
     }
     public function viewImportReconcile()
     {
         helper('form');
         $title = 'Import Data Reconcile Mitra';
+        $template = 'template-reconcile';
         $messages = $this->db->table('messages as m')
             ->join('master_classes as mc', 'mc.id = m.master_class_id', 'left')
             ->join('mitras as ma', 'ma.id = m.mitra_id', 'left')
             ->get()->getResult();
         $mitra = new Mitra();
         $mitras = $mitra->findAll();
-        return view('peserta/import-reconcile', compact('title', 'mitras', 'messages'));
+        return view('peserta/import-reconcile', compact('title', 'template', 'mitras', 'messages'));
     }
 
     public function storeImportPembelian()
@@ -760,5 +765,13 @@ class PesertaController extends BaseController
         $this->db->table('messages')->truncate();
 
         return    $this->response->setStatusCode(200, 'success truncate');
+    }
+
+
+    public function downloadTemplate($file)
+    {
+        $path = "master-data/$file";
+
+        return $this->response->download($path, null)->inline();
     }
 }

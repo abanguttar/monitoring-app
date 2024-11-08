@@ -46,6 +46,8 @@
 
     <?php if ($messages !== null): ?>
         <button class="btn btn-sm btn-danger mt-5 ms-3" id="btn-delete-error-message">Hapus Data</button>
+        <a href="/download/<?= esc($template)  ?>.xlsx" class="btn btn-success btn-sm mt-5 ms-1">Download Template Excel</a>
+
         <div class="container-fluid table-responsive mt-2">
             <?= $this->include('peserta/error-table') ?>
         </div>

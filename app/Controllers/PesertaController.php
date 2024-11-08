@@ -50,7 +50,7 @@ class PesertaController extends BaseController
         helper('form');
 
         $perPage = 50;
-        $params = $this->request->getGet(['peserta_name', 'pelatihans', 'master_class_id', 'voucher', 'invoice', 'redeem_code', 'payment_period']);
+        $params = $this->request->getGet(['peserta_name', 'pelatihans', 'master_class_id', 'mitra_id', 'voucher', 'invoice', 'redeem_code', 'payment_period']);
 
         $page = $this->request->getVar('page') ?? 1;
         $offset = ($page - 1) * $perPage;
@@ -80,6 +80,9 @@ class PesertaController extends BaseController
         if (!empty($params['master_class_id'])) {
             $builder->where('pl.master_class_id', $params['master_class_id']);
         }
+        if (!empty($params['mitra_id'])) {
+            $builder->where('p.mitra_id', $params['mitra_id']);
+        }
         if (!empty($params['voucher'])) {
             $builder->where('pl.voucher', $params['voucher']);
         }
@@ -101,13 +104,31 @@ class PesertaController extends BaseController
         $pager = \Config\Services::pager();
         $pager->makeLinks($page, $perPage, $total, 'default_full');
         $master_classes = $this->masterClass->findAll();
+        $mitras = model('Mitra')->findAll();
 
         $pelatihans = array_unique(array_map(function ($x) {
             return trim($x['class_name']);
         }, $master_classes));
 
+        $uri = (string) current_url(true);
+        if ($params['peserta_name'] === null) {
+            $uri = (string) current_url(true) . "?";
+        }
+        $currentPage =  (int) $page;
+        $tempPage = $page;
+        $nextPage = ++$page;
+        $prevPage = --$tempPage;
+        $lastPage = (int) round($total / $perPage);
+        $pagination = (object)[
+            'total' => $total,
+            'currentPage' =>  $currentPage,
+            'nextUrl' => $uri . "&page=" . $nextPage,
+            'previousUrl' => $uri . "&page=" . $prevPage,
+            'lastPage' => $lastPage,
+            'from' =>  $currentPage === $lastPage ? $total : ($page - 1) * $perPage
+        ];
 
-        return view('peserta/index', compact('title', 'datas', 'pager', 'master_classes', 'pelatihans', 'params'));
+        return view('peserta/index', compact('title',  'pagination', 'datas', 'pager', 'mitras', 'master_classes', 'pelatihans', 'params'));
     }
 
 

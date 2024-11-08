@@ -1,28 +1,21 @@
-<?php if ($pager): ?>
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <?php if ($pager->hasPreviousPage()): ?>
-                <li class="page-item">
-                    <a href="<?= $pager->getPreviousPage() ?>" class="page-link" aria-label="Previous">
+<?php if ($pagination->total > 0): ?>
+    <?php if ($pagination->lastPage > 1): ?>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item <?= $pagination->currentPage === 1 ? 'disabled' : '' ?>">
+                    <a href="<?= $pagination->previousUrl ?>" class="page-link " aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-            <?php endif ?>
 
-
-            <?php foreach ($pager->links() as $link): ?>
-                <li class="page-item <?= $link['active'] ? 'active' : '' ?>">
-                    <a href="<?= $link['uri'] ?>" class="page-link"><?= $link['title'] ?></a>
-                </li>
-            <?php endforeach ?>
-
-            <?php if ($pager->hasNextPage()): ?>
-                <li class="page-item">
-                    <a href="<?= $pager->getNextPage() ?>" class="page-link" aria-label="Next">
+                <li class="page-item <?= $pagination->currentPage === $pagination->lastPage ? 'disabled' : '' ?>">
+                    <a href="<?= $pagination->nextUrl ?>" class="page-link" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
-            <?php endif ?>
-        </ul>
-    </nav>
+            </ul>
+        </nav>
+    <?php endif ?>
+    <p>Page <?= $pagination->currentPage ?> dari <?= $pagination->lastPage ?> | Menampilkan <span class="fw-bold"><?= $pagination->from ?></span> dari total <span class="fw-bold"><?= $pagination->total ?></span> </p>
+
 <?php endif ?>

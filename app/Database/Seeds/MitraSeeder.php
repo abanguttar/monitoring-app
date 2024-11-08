@@ -16,7 +16,7 @@ class MitraSeeder extends Seeder
         $insert_data = [];
         $data = [];
         foreach ($mitras as $key => $mitra) {
-            $data['mitra_name'] = md5($mitra->nama_mitra);
+            $data['mitra_name'] = "Mitra " . ++$key;
             $data['address'] = $mitra->lokasi;
             $data['responsible'] = $mitra->penanggung_jawab;
             $data['user_create'] = $mitra->user_create;

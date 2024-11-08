@@ -38,8 +38,17 @@
 
                         <input type="text" name="redeem_code" class="form-control" value="<?= $params['redeem_code'] ?? '' ?>" placeholder="Cari Redeem Code">
                     </div>
+
                     <div class="col-12 col-lg-3">
                         <input type="text" name="payment_period" class="form-control" value="<?= $params['payment_period'] ?? '' ?>" placeholder="Cari Periode">
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <select name="mitra_id" class="form-select" id="mitra_id">
+                            <option value="">--- Pilih Mitra ---</option>
+                            <?php foreach ($mitras as $key => $mitra): ?>
+                                <option value="<?= esc($mitra['id']) ?>"><?= esc($mitra['mitra_name'])   ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                     <div class="col-12 col-lg-3 mt-2">
                         <button type="submit" class="btn btn-sm btn-info text-white">Cari</button>
@@ -123,7 +132,7 @@
             </table>
         </div>
         <div class="container-fluid pb-5 mb-5" style="margin-bottom: 10rem!important;">
-            <?= $pager->links() ?>
+            <?= $this->include('/pagination/index'); ?>
         </div>
     </div>
 </div>
@@ -134,8 +143,10 @@
     $(document).ready(function() {
         const pelatihans = <?php echo json_encode($params['pelatihans']) ?? '' ?>;
         const master_class_id = <?php echo json_encode($params['master_class_id']) ?? '' ?>;
+        const mitra_id = <?php echo json_encode($params['mitra_id']) ?? '' ?>;
         $('#pelatihans').select2().val(pelatihans).trigger('change');
         $('#master_class_id').select2().val(master_class_id).trigger('change');
+        $('#mitra_id').select2().val(mitra_id).trigger('change');
     })
 </script>
 <?= $this->endSection() ?>

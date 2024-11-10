@@ -44,6 +44,7 @@ abstract class BaseController extends Controller
 
     public function __construct()
     {
+
         $this->auth = service('authentication');
         $this->user_create_update = [
             'user_create' => $this->auth->user()->id,
@@ -94,5 +95,6 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+        helper('auth');
     }
 }

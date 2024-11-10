@@ -23,16 +23,40 @@ class MasterClassController extends BaseController
         $title = 'Master Class';
         $perPage = 50;
         $page = $this->request->getVar('page') ?? 1;
+        $params = $this->request->getGet(['master_class_id']);
         $offset = ($page - 1) * $perPage;
         $builder = $this->db->table('master_classes as mc')
             ->join('users as u', 'u.id = mc.user_update', 'left')
             ->select('mc.*, u.username');
+
+        if (!empty($params['master_class_id'])) {
+            $builder->where('mc.id', $params['master_class_id']);
+        }
+
+
         $total = $builder->countAllResults(false);
         $masterClasses = $builder->limit($perPage, $offset)->get()->getResult();
-        $pager = \Config\Services::pager();
-        $pager->makeLinks($page, $perPage, $total, 'default_full');
 
-        return view('master-class/index', compact('title', 'masterClasses', 'pager'));
+        $uri = (string) current_url(true);
+        if ($params['master_class_id'] === null) {
+            $uri = (string) current_url(true) . "?";
+        }
+        $master_classes = $this->masterClass->findAll();
+
+        $currentPage =  (int) $page;
+        $tempPage = $page;
+        $nextPage = ++$page;
+        $prevPage = --$tempPage;
+        $lastPage = (int) round($total / $perPage);
+        $pagination = (object)[
+            'total' => $total,
+            'currentPage' =>  $currentPage,
+            'nextUrl' => $uri . "&page=" . $nextPage,
+            'previousUrl' => $uri . "&page=" . $prevPage,
+            'lastPage' => $lastPage,
+            'from' =>  $currentPage >= $lastPage ? $total : ($page - 1) * $perPage
+        ];
+        return view('master-class/index', compact('title', 'pagination', 'params', 'masterClasses',  'master_classes'));
     }
 
 

@@ -11,11 +11,14 @@
         <div class="row gap-2">
 
             <a href="/dashboard" class="btn btn-light p-2">Dashboard</a>
+            <a href="/grafik-transaksi" class="btn btn-light p-2">Grafik Transaksi</a>
             <a href="/peserta" class="btn btn-light p-2">List Peserta</a>
             <a href="/mitra" class="btn btn-light p-2">List Mitra</a>
             <a href="/digital-platform" class="btn btn-light p-2">List Digital Platform</a>
             <a href="/master-class" class="btn btn-light p-2">List Master Class</a>
-            <a href="/users" class="btn btn-light p-2">List User</a>
+            <?php if ((int) user()->tipe === 999): ?>
+                <a href="/users" class="btn btn-light p-2">List User</a>
+            <?php endif; ?>
             <a href="/logout" class="btn btn-light p-2">Logout</a>
         </div>
     </div>

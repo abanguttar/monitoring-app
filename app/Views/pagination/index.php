@@ -16,6 +16,6 @@
             </ul>
         </nav>
     <?php endif ?>
-    <p>Page <?= $pagination->currentPage ?> dari <?= $pagination->lastPage ?> | Menampilkan <span class="fw-bold"><?= $pagination->from ?></span> dari total <span class="fw-bold"><?= $pagination->total ?></span> </p>
+    <p>Page <?= $pagination->currentPage ?> dari <?= $pagination->lastPage === 0 ? 1 : $pagination->lastPage ?> | Menampilkan <span class="fw-bold"><?= $pagination->from ?></span> dari total <span class="fw-bold"><?= $pagination->total ?></span> </p>
 
 <?php endif ?>

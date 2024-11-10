@@ -99,6 +99,13 @@
             }
             window.location.href = `${id}/edit`;
         })
+        $(document).on('click', '#btn-permissions', function() {
+            if (id === '') {
+                alert("Mohon pilih data dengan benar!");
+                return
+            }
+            window.location.href = `${id}/permissions`;
+        })
         $(document).on('click', '#btn-add-pelatihan', function() {
             const peserta_id = $('.table-row.table-info').data('peserta_id');
             if (peserta_id === undefined) {

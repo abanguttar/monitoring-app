@@ -101,8 +101,6 @@ class PesertaController extends BaseController
 
         $total = $builder->countAllResults(false);
         $datas = $builder->limit($perPage, $offset)->get()->getResult();
-        $pager = \Config\Services::pager();
-        $pager->makeLinks($page, $perPage, $total, 'default_full');
         $master_classes = $this->masterClass->findAll();
         $mitras = model('Mitra')->findAll();
 
@@ -125,10 +123,10 @@ class PesertaController extends BaseController
             'nextUrl' => $uri . "&page=" . $nextPage,
             'previousUrl' => $uri . "&page=" . $prevPage,
             'lastPage' => $lastPage,
-            'from' =>  $currentPage === $lastPage ? $total : ($page - 1) * $perPage
+            'from' =>  $currentPage >= $lastPage ? $total : ($page - 1) * $perPage
         ];
 
-        return view('peserta/index', compact('title',  'pagination', 'datas', 'pager', 'mitras', 'master_classes', 'pelatihans', 'params'));
+        return view('peserta/index', compact('title',  'pagination', 'datas', 'mitras', 'master_classes', 'pelatihans', 'params'));
     }
 
 

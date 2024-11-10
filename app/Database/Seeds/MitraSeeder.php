@@ -18,7 +18,7 @@ class MitraSeeder extends Seeder
         foreach ($mitras as $key => $mitra) {
             $data['mitra_name'] = "Mitra " . ++$key;
             $data['address'] = $mitra->lokasi;
-            $data['responsible'] = $mitra->penanggung_jawab;
+            $data['responsible'] = "Penanggung Jawab " . $key;
             $data['user_create'] = $mitra->user_create;
             $data['user_update'] = $mitra->user_update === null ? $mitra->user_create : $mitra->user_create;
             $data['created_at'] = $mitra->created_at;

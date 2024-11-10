@@ -3,10 +3,24 @@
 <?= $this->section('content') ?>
 
 <div class="container-fluid ">
-    <div class="container-fluid mt-5">
 
-        <a href="master-class/new" class="btn btn-success">Create Master Class</a>
-        <button id="btn-edit" class="btn btn-primary">Edit Master Class</button>
+    <div class="container-fluid mt-2">
+        <form action="" class="mt-5">
+            <div class="col-12 col-lg-3">
+                <select name="master_class_id" class="form-select" id="master_class_id">
+                    <option value="">--- Pilih Pelatihan dan Jadwal ---</option>
+                    <?php foreach ($master_classes as $key => $master_class): ?>
+                        <option value="<?= esc($master_class['id']) ?>"><?= esc($master_class['class_name']) . ' - ' . esc($master_class['jadwal'])  ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="col-12 col-lg-3 mt-2">
+                <button type="submit" class="btn btn-sm btn-info text-white">Cari</button>
+                <a href="/peserta" class="btn btn-sm btn-dark text-white">Reset</a>
+            </div>
+        </form>
+        <a href="master-class/new" class="btn mt-3 btn-success">Create Master Class</a>
+        <button id="btn-edit" class="btn btn-primary mt-3">Edit Master Class</button>
         <table class="table table-sm table-bordered table-hovered table-striped mt-2">
             <thead class="table-dark">
                 <tr>
@@ -43,9 +57,14 @@
             </tbody>
         </table>
         <div class="container-full" style="margin-bottom: 18rem!important;">
-            <?= $pager->links() ?>
+            <?= $this->include('/pagination/index'); ?>
         </div>
     </div>
 </div>
 
+<?= $this->endSection() ?>
+<?= $this->section('script') ?>
+<script>
+    $('#master_class_id').select2().val(<?php echo json_encode($params['master_class_id']) ?? '' ?>).trigger('change')
+</script>
 <?= $this->endSection() ?>

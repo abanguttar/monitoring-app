@@ -15,6 +15,10 @@ class PermissionsTable extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'group' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
+            ],
             'name' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',

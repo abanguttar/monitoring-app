@@ -46,7 +46,7 @@ class AccessFilter extends BaseFilter implements FilterInterface
              * Check is user have the permissions?
              */
             if (!in_array((int) $arguments[0], $permissions)) {
-                return redirect()->back()->with('errors', ['User not have access to this page!']);
+                return redirect()->back()->with('error_permissions', ['User not have access to this page!']);
             }
         }
     }

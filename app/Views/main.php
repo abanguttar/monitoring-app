@@ -155,6 +155,15 @@
             window.location.href = `${id}/update-payment`;
         })
     </script>
+    <?php if (session()->has('error_permissions')): ?>
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "User not have access to this page!",
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>
